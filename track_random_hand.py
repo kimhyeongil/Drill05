@@ -1,8 +1,4 @@
 from pico2d import *
-open_canvas()  
-
-backGround = load_image('TUK_GROUND_FULL.png')
-hand = load_image('hand_arrow.png')
 
 class Player:
     def __init__(self):
@@ -15,9 +11,23 @@ class Player:
         self.frame = (self.frame + 1) % self.nFrame
 class GameManager:
     def __init__(self):
-        print('class GameManager')
+        open_canvas(1024,720)
+        self.backGround = load_image('TUK_GROUND_FULL.png')
+        self.hand = load_image('hand_arrow.png')
+        self.w, self.h = 1024, 720
+        self.player = Player()
+        resize_canvas(self.w, self.h)
+    def render(self):
+        clear_canvas()
+        self.backGround.draw(self.w // 2, self.h // 2)
+        self.player.draw()
+        self.hand.draw(self.w // 2, self.h // 2)
+        update_canvas()
+        delay(0.1)
 GM = GameManager()
 
+while True:
+    GM.render()
 delay(1)
 
 close_canvas()
