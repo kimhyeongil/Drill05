@@ -11,6 +11,10 @@ class Player:
         self.sprite.clip_draw(self.frame * 100, 0, 100, 100, self.pos[x], self.pos[y])
         self.frame = (self.frame + 1) % self.nFrame
 
+    def track(self, target, t):
+        x, y = 0,1
+        self.pos[x] = (1 - t) * self.pos[x] + t * target[x]
+        self.pos[y] = (1 - t) * self.pos[y] + t * target[y]
 
 class Hand:
     def __init__(self):
@@ -18,8 +22,8 @@ class Hand:
         self.set_random_pos()
     
     def set_random_pos(self):
-        self.pos = [random.randint(0 + self.img.w, get_canvas_width() - self.img.w), random.randint(0 + self.img.h, get_canvas_height() - self.img.h)]
-        
+        self.pos = [random.randint(0 + self.img.w, get_canvas_width() - self.img.w), random.randint(0 + self.img.h, get_canvas_height() - self.img.h)]   
+
     def draw(self):
         x, y = 0, 1
         self.img.draw(self.pos[x], self.pos[y])
@@ -42,11 +46,14 @@ class GameManager:
         update_canvas()
         delay(0.1)
 
+    def logic(self):
+        self.player.track(self.hand.pos, 0.2)
 
 GM = GameManager()
 
 while True:
     GM.render()
+    GM.logic()
 delay(1)
 
 close_canvas()
