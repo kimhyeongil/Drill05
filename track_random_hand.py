@@ -9,11 +9,16 @@ class Player:
         x, y = 0, 1
         self.sprite.clip_draw(self.frame * 100, 0, 100, 100, self.pos[x], self.pos[y])
         self.frame = (self.frame + 1) % self.nFrame
+class Hand:
+    def __init__(self):
+        self.img = load_image('hand_arrow.png')
+    def draw(self, x, y):
+        self.img.draw(x, y)
 class GameManager:
     def __init__(self):
         open_canvas(1024,720)
         self.backGround = load_image('TUK_GROUND_FULL.png')
-        self.hand = load_image('hand_arrow.png')
+        self.hand = Hand()
         self.w, self.h = 1024, 720
         self.player = Player()
         resize_canvas(self.w, self.h)
