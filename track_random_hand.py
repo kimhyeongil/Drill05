@@ -10,7 +10,7 @@ class Player:
         self.pos = [get_canvas_width() // 2, get_canvas_height() // 2]
     def draw(self):
         x, y = 0, 1
-        self.sprite.draw(self.pos[x], self.pos[y])
+        self.sprite.clip_draw(0, 0, 100, 100, self.pos[x], self.pos[y])
 clear_canvas()
 backGround.draw(400,400)
 player = Player()
