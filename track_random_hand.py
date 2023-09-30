@@ -13,14 +13,10 @@ class Player:
         x, y = 0, 1
         self.sprite.clip_draw(self.frame * 100, 0, 100, 100, self.pos[x], self.pos[y])
         self.frame = (self.frame + 1) % self.nFrame
-player = Player()
-while True:
-    clear_canvas()
-    backGround.draw(400,400)
-    player.draw()
-    hand.draw(400,400)
-    update_canvas()
-    delay(0.1)
+class GameManager:
+    def __init__(self):
+        print('class GameManager')
+GM = GameManager()
 
 delay(1)
 
