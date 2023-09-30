@@ -1,5 +1,6 @@
 from pico2d import *
 import random
+
 class Player:
     def __init__(self):
         self.sprite = load_image('animation_sheet.png')
@@ -29,6 +30,8 @@ class Hand:
         self.img.draw(self.pos[x], self.pos[y])
 
 
+def isCollide(p1, p2, gap):
+    return abs(p1[0] - p2[0]) < gap and abs(p1[1] -p2[1]) < gap
 class GameManager:
     def __init__(self):
         open_canvas(1024,720)
@@ -48,6 +51,8 @@ class GameManager:
 
     def logic(self):
         self.player.track(self.hand.pos, 0.2)
+        if( isCollide(self.hand.pos, self.player.pos, self.hand.img.w // 2)):
+            self.hand.set_random_pos()
 
 GM = GameManager()
 
